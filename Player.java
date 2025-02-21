@@ -35,6 +35,9 @@ public class Player {
         return false;
     }
 
+    /**
+    * This method finds the last tile' position!
+    */
     public int findPositionOfTile(Tile t) {
         int tilePosition = -1;
         for (int i = 0; i < numberOfTiles; i++) {
