@@ -25,7 +25,7 @@ public class Player {
     public void addTile(Tile t) {
         if (numberOfTiles <= 15) {
             int index = 0;
-            while (index < numberOfTiles && numberOfTiles && playerTiles[index] < t) {
+            while (index < numberOfTiles && numberOfTiles && playerTiles[index].compareTo(t) < 0) {
                 index++;
             }
 
