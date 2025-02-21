@@ -17,12 +17,25 @@ public class Player {
     }
 
     /*
+     * @author Cagla Gunes
      * TODO: adds the given tile to the playerTiles in order
      * should also update numberOfTiles accordingly.
      * make sure playerTiles are not more than 15 at any time
      */
     public void addTile(Tile t) {
+        if (numberOfTiles <= 15) {
+            int index = 0;
+            while (index < numberOfTiles && numberOfTiles && playerTiles[index] < t) {
+                index++;
+            }
 
+            for (int i = numberOfTiles; i > index; i--) {
+                playerTiles[i] = playerTiles[i - 1];
+            }
+
+            playerTiles[index] = t;
+            numberOfTiles++;
+        }  
     }
 
     /*
