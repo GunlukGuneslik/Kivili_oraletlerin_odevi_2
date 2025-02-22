@@ -1,3 +1,5 @@
+import java.util.Collection;
+
 public class OkeyGame {
 
     Player[] players;
@@ -54,10 +56,11 @@ public class OkeyGame {
     }
 
     /*
+     * @zeynep
      * TODO: should randomly shuffle the tiles array before game starts
      */
     public void shuffleTiles() {
-
+        Collections.shuffle(tiles, new Random());
     }
 
     /*
@@ -90,12 +93,14 @@ public class OkeyGame {
     }
 
     /*
+     * @zeynep
      * TODO: discards the current player's tile at given index
      * this should set lastDiscardedTile variable and remove that tile from
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
-
+        Player currentPlayer = players[currentPlayerIndex];
+        lastDiscardedTile = currentPlayer.getAndRemoveTile(tileIndex);
     }
 
     public void displayDiscardInformation() {
