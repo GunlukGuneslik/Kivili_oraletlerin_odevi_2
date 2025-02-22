@@ -1,4 +1,7 @@
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Random;
 
 public class OkeyGame {
 
@@ -60,7 +63,7 @@ public class OkeyGame {
      * TODO: should randomly shuffle the tiles array before game starts
      */
     public void shuffleTiles() {
-        Collections.shuffle(tiles, new Random());
+        Collections.shuffle(Arrays.asList(tiles));
     }
 
     /*
