@@ -41,12 +41,13 @@ public class OkeyGame {
     }
 
     /*
+     * @author zeynep
      * TODO: get the last discarded tile for the current player
      * (this simulates picking up the tile discarded by the previous player)
      * it should return the toString method of the tile so that we can print what we picked
      */
     public String getLastDiscardedTile() {
-        return null;
+        return lastDiscardedTile.toString();
     }
 
     /*
@@ -59,7 +60,7 @@ public class OkeyGame {
     }
 
     /*
-     * @zeynep
+     * @author zeynep
      * TODO: should randomly shuffle the tiles array before game starts
      */
     public void shuffleTiles() {
@@ -96,7 +97,7 @@ public class OkeyGame {
     }
 
     /*
-     * @zeynep
+     * @author zeynep
      * TODO: discards the current player's tile at given index
      * this should set lastDiscardedTile variable and remove that tile from
      * that player's tiles

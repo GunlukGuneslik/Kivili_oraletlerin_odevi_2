@@ -10,7 +10,7 @@ public class Player {
     }
 
     /*
-     * @zeynep
+     * @author zeynep
      * TODO: removes and returns the tile in given index
      */
     public Tile getAndRemoveTile(int index) {
