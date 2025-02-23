@@ -59,8 +59,8 @@ public class OkeyGame {
      * (this simulates picking up the tile discarded by the previous player)
      * it should return the toString method of the tile so that we can print what we picked
      */
-    public String getLastDiscardedTile() {
-        return lastDiscardedTile.toString();
+    public Tile getLastDiscardedTile() {
+        return lastDiscardedTile;
     }
 
     /*
@@ -72,7 +72,7 @@ public class OkeyGame {
      * If there is no tile left in the stack it returns to null.
      * After getting the top tile from tiles array; method makes the top tile's place null.
      */
-    public String getTopTile() {
+    public Tile getTopTile() {
         int index = findIndexOfArraysLastElement(tiles);
         if (index >= 0) {
             Tile pickedTile = tiles[index];
@@ -122,7 +122,30 @@ public class OkeyGame {
      * the current status. Print whether computer picks from tiles or discarded ones.
      */
     public void pickTileForComputer() {
-
+        
+        boolean canChain= false;
+        boolean alreadyExists= false;
+        for(int i=0; i<players[currentPlayerIndex].numberOfTiles; i++)
+        {
+            if(getLastDiscardedTile().canFormChainWith(players[currentPlayerIndex].getTiles()[i]))
+            {
+                canChain=true;
+            }
+            if(getLastDiscardedTile().compareTo(players[currentPlayerIndex].getTiles()[i])==0)
+            {
+                alreadyExists=true;
+            }
+        }
+        if(!alreadyExists && canChain)
+        {
+            players[currentPlayerIndex].addTile(getLastDiscardedTile());
+            System.out.println("Player "+players[currentPlayerIndex].getName()+" picked the last discarded tile.");
+        }
+        else
+        {
+            players[currentPlayerIndex].addTile(getTopTile());
+            System.out.println("Player "+players[currentPlayerIndex].getName()+" picked a tile from tiles.");
+        }
     }
 
     /*
