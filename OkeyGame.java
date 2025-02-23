@@ -32,12 +32,25 @@ public class OkeyGame {
     }
 
     /*
+     * @author Cagla Gunes
      * TODO: distributes the starting tiles to the players
      * player at index 0 gets 15 tiles and starts first
      * other players get 14 tiles
      * this method assumes the tiles are already shuffled
      */
     public void distributeTilesToPlayers() {
+        for (int i = 0; i < players.length; i++) {
+            Player currentPlayer = players[i];
+            for (int a = 0; a < 14; a++) {
+                Tile pickedTile = getTopTile();
+                currentPlayer.addTile(pickedTile);
+            }
+
+            if (i == 0) {
+                Tile pickedTile = getTopTile();
+                currentPlayer.addTile(pickedTile);
+            }
+        }
     }
 
     /*
@@ -51,12 +64,38 @@ public class OkeyGame {
     }
 
     /*
+     * @ author Cagla Gunes
      * TODO: get the top tile from tiles array for the current player
      * that tile is no longer in the tiles array (this simulates picking up the top tile)
      * it should return the toString method of the tile so that we can print what we picked
+     * My implementation notes:
+     * If there is no tile left in the stack it returns to null.
+     * After getting the top tile from tiles array; method makes the top tile's place null.
      */
     public String getTopTile() {
+        int index = findIndexOfArraysLastElement(tiles);
+        if (index >= 0) {
+            Tile pickedTile = tiles[index];
+            tiles[index] = 0;
+            return pickedTile;
+        }
         return null;
+    }
+
+    /*
+    * @author Cagla Gunes
+    * Finds the last element's index in an partially filled array.
+    * this method assumes that array is filled by starting from index 0 and there is no gap (null element) between consecutive elements.
+    * If the first element is null it returns -1 indicates array is filled with null elements.
+    *   If array is completely filled it returns -2.
+    */
+    private static int findIndexOfArraysLastElement(Arrays arr[]) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null) {
+                return i - 1;
+            }
+        }
+        return -2;
     }
 
     /*
