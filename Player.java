@@ -51,7 +51,25 @@ public class Player {
      * @return
      */
     public boolean isWinningHand() {
-        return false;
+        int chainCount=0;
+        int tileCount=1;
+        for(int i=1; i<this.numberOfTiles; i++)
+        {
+            if(playerTiles[i-1].getValue() == playerTiles[i].getValue() && playerTiles[i-1].getColor() != playerTiles[i].getColor())
+            {
+                tileCount++;
+                if(tileCount==4)
+                {
+                    chainCount++;
+                    tileCount=1;
+                }
+            }
+            else if(playerTiles[i-1].getValue() != playerTiles[i].getValue())
+            {
+                tileCount=1;
+            }
+        }
+        return chainCount==3;
     }
 
     /**
