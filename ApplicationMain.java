@@ -55,11 +55,11 @@ public class ApplicationMain {
                 // after the first turn we can pick up
                 if(!firstTurn) {
                     if(playerChoice == 1) {
-                        System.out.println("You picked up: " + game.getTopTile());
+                        System.out.println("You picked up: " + game.getTopTile().toString());
                         firstTurn = false;
                     }
                     else if(playerChoice == 2) {
-                        System.out.println("You picked up: " + game.getLastDiscardedTile()); 
+                        System.out.println("You picked up: " + game.getLastDiscardedTile().toString()); 
                     }
 
                     // display the hand after picking up new tile
