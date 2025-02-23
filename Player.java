@@ -45,6 +45,7 @@ public class Player {
     }
 
     /*
+     * @author Kerem
      * TODO: checks if this player's hand satisfies the winning condition
      * to win this player should have 3 chains of length 4, extra tiles
      * does not disturb the winning condition

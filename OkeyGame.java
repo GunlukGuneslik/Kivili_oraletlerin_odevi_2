@@ -107,6 +107,7 @@ public class OkeyGame {
     }
 
     /*
+     * @author Kerem   
      * TODO: check if game still continues, should return true if current player
      * finished the game, use isWinningHand() method of Player to decide
      */
@@ -115,6 +116,7 @@ public class OkeyGame {
     }
 
     /*
+     * @author Kerem 
      * TODO: Pick a tile for the current computer player using one of the following:
      * - picking from the tiles array using getTopTile()
      * - picking from the lastDiscardedTile using getLastDiscardedTile()
