@@ -150,13 +150,42 @@ public class OkeyGame {
         }
     }
 
-    /*
+   /*
+     * @author: Eftelya
      * TODO: Current computer player will discard the least useful tile.
      * this method should print what tile is discarded since it should be
      * known by other players. You may first discard duplicates and then
      * the single tiles and tiles that contribute to the smallest chains.
      */
     public void discardTileForComputer() {
+        Player curPlayer = players[currentPlayerIndex];
+        for(int i = 1 ; i< curPlayer.getTiles().length; i++)
+        {
+            if(curPlayer.getTiles()[i].compareTo(curPlayer.getTiles()[i-1])== 0)
+            {
+                lastDiscardedTile =curPlayer.getAndRemoveTile(i-1);
+                displayDiscardInformation();
+            }
+        }
+
+        if(lastDiscardedTile== null)
+        {
+         boolean isSingle= false;
+            for(int i = 0 ; i< curPlayer.getTiles().length-1; i++)
+            {
+              if(curPlayer.getTiles()[i].getValue() != curPlayer.getTiles()[i+1].getValue())
+                {
+                    isSingle= true;
+                }
+
+              if(isSingle)
+                {
+                    lastDiscardedTile =curPlayer.getAndRemoveTile(i);
+                    displayDiscardInformation();
+                }
+            }
+            
+        }
 
     }
 
