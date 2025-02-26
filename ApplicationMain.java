@@ -77,11 +77,18 @@ public class ApplicationMain {
                     System.out.println("Which tile you will discard?");
                     System.out.print("Discard the tile in index: ");
                     playerChoice = sc.nextInt();
-
+                    
+                    //@author:Eftelya
                     // TODO: make sure the given index is correct, should be 0 <= index <= 14
-
+                    while(playerChoice < 0 || playerChoice > 14)
+                    {
+                        System.out.println("wrong index! Enter an index between 0-14: ");
+                        playerChoice= sc.nextInt(); 
+                    }
                     game.discardTile(playerChoice);
                     game.passTurnToNextPlayer();
+
+                
                 }
                 else{
                     // if we finish the hand we win
