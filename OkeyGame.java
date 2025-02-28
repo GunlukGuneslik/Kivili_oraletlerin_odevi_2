@@ -159,32 +159,28 @@ public class OkeyGame {
      */
     public void discardTileForComputer() {
         Player curPlayer = players[currentPlayerIndex];
-        for(int i = 1 ; i< curPlayer.getTiles().length; i++)
-        {
-            if(curPlayer.getTiles()[i].compareTo(curPlayer.getTiles()[i-1])== 0)
-            {
-                lastDiscardedTile =curPlayer.getAndRemoveTile(i-1);
+        for (int i = 1; i < curPlayer.getTiles().length; i++) {
+            if (curPlayer.getTiles()[i].compareTo(curPlayer.getTiles()[i - 1]) == 0) {
+                lastDiscardedTile = curPlayer.getAndRemoveTile(i - 1);
                 displayDiscardInformation();
+                return;
             }
         }
 
-        if(lastDiscardedTile== null)
-        {
-         boolean isSingle= false;
-            for(int i = 0 ; i< curPlayer.getTiles().length-1; i++)
-            {
-              if(curPlayer.getTiles()[i].getValue() != curPlayer.getTiles()[i+1].getValue())
-                {
-                    isSingle= true;
-                }
-
-              if(isSingle)
-                {
-                    lastDiscardedTile =curPlayer.getAndRemoveTile(i);
-                    displayDiscardInformation();
-                }
+        for (int i = 0; i < curPlayer.getTiles().length; i++) {
+            boolean matching = false;
+            if (i > 0) {
+                matching = matching || curPlayer.getTiles()[i].getValue() == curPlayer.getTiles()[i - 1].getValue();
             }
-            
+            if (i < curPlayer.getTiles().length - 1) {
+                matching = matching || curPlayer.getTiles()[i].getValue() == curPlayer.getTiles()[i + 1].getValue();
+            }
+
+            if (matching) {
+                lastDiscardedTile = curPlayer.getAndRemoveTile(i);
+                displayDiscardInformation();
+                return;
+            }
         }
 
     }
