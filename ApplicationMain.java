@@ -6,6 +6,19 @@ public class ApplicationMain {
         Scanner sc = new Scanner(System.in);
         OkeyGame game = new OkeyGame();
 
+        boolean willPlay;
+        while (true) {
+            System.out.println("Will there be a human Player? (Y/N):");
+            String input = sc.next();
+            input = input.toUpperCase();
+            if (!"YN".contains(input)) {
+                System.out.println("Invalid input.");
+                continue;
+            }
+            willPlay = input.equalsIgnoreCase("Y");
+            break;
+        }
+
         System.out.print("Please enter your name: ");
         String playerName = sc.next();
 
@@ -34,7 +47,7 @@ public class ApplicationMain {
             System.out.println(game.getCurrentPlayerName() + "'s turn.");
 
             // this is the human player's turn
-            if (currentPlayer == 0) {
+            if (willPlay && currentPlayer == 0) {
                 game.displayCurrentPlayersTiles();
                 game.displayDiscardInformation();
 
