@@ -6,7 +6,8 @@ public class Player {
     public Player(String name) {
         setName(name);
         playerTiles = new Tile[15]; // there are at most 15 tiles a player owns at any time
-        numberOfTiles = 0; // currently this player owns 0 tiles, will pick tiles at the beggining of the game
+        numberOfTiles = 0; // currently this player owns 0 tiles, will pick tiles at the beggining of the
+                           // game
     }
 
     /*
@@ -15,8 +16,8 @@ public class Player {
      */
     public Tile getAndRemoveTile(int index) {
         Tile tile = playerTiles[index];
-        for (int i = index; i < playerTiles.length-1; i++) {
-            playerTiles[i] = playerTiles[i+1];
+        for (int i = index; i < playerTiles.length - 1; i++) {
+            playerTiles[i] = playerTiles[i + 1];
         }
         playerTiles[playerTiles.length - 1] = null;
         return tile;
@@ -41,7 +42,7 @@ public class Player {
 
             playerTiles[index] = t;
             numberOfTiles++;
-        }  
+        }
     }
 
     /*
@@ -49,39 +50,35 @@ public class Player {
      * TODO: checks if this player's hand satisfies the winning condition
      * to win this player should have 3 chains of length 4, extra tiles
      * does not disturb the winning condition
+     * 
      * @return
      */
     public boolean isWinningHand() {
-        int chainCount=0;
-        int tileCount=1;
-        for(int i=1; i<this.numberOfTiles; i++)
-        {
-           Tile FormerTile=this.playerTiles[i-1];
-           Tile tile=this.playerTiles[i];
-           if(tile.canFormChainWith(FormerTile))
-           {
+        int chainCount = 0;
+        int tileCount = 1;
+        for (int i = 1; i < this.numberOfTiles; i++) {
+            Tile FormerTile = this.playerTiles[i - 1];
+            Tile tile = this.playerTiles[i];
+            if (tile.canFormChainWith(FormerTile)) {
                 tileCount++;
-                if(tileCount==4)
-                {
+                if (tileCount == 4) {
                     chainCount++;
-                    tileCount=1;
+                    tileCount = 1;
                 }
-           }
-           else if(!tile.canFormChainWith(FormerTile) && tile.getValue()!=FormerTile.getValue())
-           {
-            tileCount=1;
-           }
+            } else if (!tile.canFormChainWith(FormerTile) && tile.getValue() != FormerTile.getValue()) {
+                tileCount = 1;
+            }
         }
-        return chainCount==3;
+        return chainCount == 3;
     }
 
     /**
-    * This method finds the last tile' position!
-    */
+     * This method finds the last tile' position!
+     */
     public int findPositionOfTile(Tile t) {
         int tilePosition = -1;
         for (int i = 0; i < numberOfTiles; i++) {
-            if(playerTiles[i].compareTo(t) == 0) {
+            if (playerTiles[i].compareTo(t) == 0) {
                 tilePosition = i;
             }
         }

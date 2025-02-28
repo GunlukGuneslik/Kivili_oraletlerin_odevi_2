@@ -5,7 +5,26 @@ import java.util.Random;
 
 public class OkeyGame {
 
+    /*
+     * @author Cagla Gunes
+     * Finds the last element's index in an partially filled array.
+     * this method assumes that array is filled by starting from index 0 and there
+     * is no gap (null element) between consecutive elements.
+     * If the first element is null it returns -1 indicates array is filled with
+     * null elements.
+     * If array is completely filled it returns -2.
+     */
+    private static int findIndexOfArraysLastElement(Arrays arr[]) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null) {
+                return i - 1;
+            }
+        }
+        return -2;
+    }
+
     Player[] players;
+
     Tile[] tiles;
 
     Tile lastDiscardedTile;
@@ -23,10 +42,10 @@ public class OkeyGame {
         // two copies of each color-value combination, no jokers
         for (int i = 1; i <= 7; i++) {
             for (int j = 0; j < 4; j++) {
-                tiles[currentTile++] = new Tile(i,'Y');
-                tiles[currentTile++] = new Tile(i,'B');
-                tiles[currentTile++] = new Tile(i,'R');
-                tiles[currentTile++] = new Tile(i,'K');
+                tiles[currentTile++] = new Tile(i, 'Y');
+                tiles[currentTile++] = new Tile(i, 'B');
+                tiles[currentTile++] = new Tile(i, 'R');
+                tiles[currentTile++] = new Tile(i, 'K');
             }
         }
     }
@@ -57,7 +76,8 @@ public class OkeyGame {
      * @author zeynep
      * TODO: get the last discarded tile for the current player
      * (this simulates picking up the tile discarded by the previous player)
-     * it should return the toString method of the tile so that we can print what we picked
+     * it should return the toString method of the tile so that we can print what we
+     * picked
      */
     public Tile getLastDiscardedTile() {
         return lastDiscardedTile;
@@ -66,11 +86,14 @@ public class OkeyGame {
     /*
      * @ author Cagla Gunes
      * TODO: get the top tile from tiles array for the current player
-     * that tile is no longer in the tiles array (this simulates picking up the top tile)
-     * it should return the toString method of the tile so that we can print what we picked
+     * that tile is no longer in the tiles array (this simulates picking up the top
+     * tile)
+     * it should return the toString method of the tile so that we can print what we
+     * picked
      * My implementation notes:
      * If there is no tile left in the stack it returns to null.
-     * After getting the top tile from tiles array; method makes the top tile's place null.
+     * After getting the top tile from tiles array; method makes the top tile's
+     * place null.
      */
     public Tile getTopTile() {
         int index = findIndexOfArraysLastElement(tiles);
@@ -83,22 +106,6 @@ public class OkeyGame {
     }
 
     /*
-    * @author Cagla Gunes
-    * Finds the last element's index in an partially filled array.
-    * this method assumes that array is filled by starting from index 0 and there is no gap (null element) between consecutive elements.
-    * If the first element is null it returns -1 indicates array is filled with null elements.
-    *   If array is completely filled it returns -2.
-    */
-    private static int findIndexOfArraysLastElement(Arrays arr[]) {
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == null) {
-                return i - 1;
-            }
-        }
-        return -2;
-    }
-
-    /*
      * @author zeynep
      * TODO: should randomly shuffle the tiles array before game starts
      */
@@ -107,7 +114,7 @@ public class OkeyGame {
     }
 
     /*
-     * @author Kerem   
+     * @author Kerem
      * TODO: check if game still continues, should return true if current player
      * finished the game, use isWinningHand() method of Player to decide
      */
@@ -116,41 +123,36 @@ public class OkeyGame {
     }
 
     /*
-     * @author Kerem 
+     * @author Kerem
      * TODO: Pick a tile for the current computer player using one of the following:
      * - picking from the tiles array using getTopTile()
      * - picking from the lastDiscardedTile using getLastDiscardedTile()
      * You should consider if the discarded tile is useful for the computer in
-     * the current status. Print whether computer picks from tiles or discarded ones.
+     * the current status. Print whether computer picks from tiles or discarded
+     * ones.
      */
     public void pickTileForComputer() {
-        
-        boolean canChain= false;
-        boolean alreadyExists= false;
-        for(int i=0; i<players[currentPlayerIndex].numberOfTiles; i++)
-        {
-            if(getLastDiscardedTile().canFormChainWith(players[currentPlayerIndex].getTiles()[i]))
-            {
-                canChain=true;
+
+        boolean canChain = false;
+        boolean alreadyExists = false;
+        for (int i = 0; i < players[currentPlayerIndex].numberOfTiles; i++) {
+            if (getLastDiscardedTile().canFormChainWith(players[currentPlayerIndex].getTiles()[i])) {
+                canChain = true;
             }
-            if(getLastDiscardedTile().compareTo(players[currentPlayerIndex].getTiles()[i])==0)
-            {
-                alreadyExists=true;
+            if (getLastDiscardedTile().compareTo(players[currentPlayerIndex].getTiles()[i]) == 0) {
+                alreadyExists = true;
             }
         }
-        if(!alreadyExists && canChain)
-        {
+        if (!alreadyExists && canChain) {
             players[currentPlayerIndex].addTile(getLastDiscardedTile());
-            System.out.println("Player "+players[currentPlayerIndex].getName()+" picked the last discarded tile.");
-        }
-        else
-        {
+            System.out.println("Player " + players[currentPlayerIndex].getName() + " picked the last discarded tile.");
+        } else {
             players[currentPlayerIndex].addTile(getTopTile());
-            System.out.println("Player "+players[currentPlayerIndex].getName()+" picked a tile from tiles.");
+            System.out.println("Player " + players[currentPlayerIndex].getName() + " picked a tile from tiles.");
         }
     }
 
-   /*
+    /*
      * @author: Eftelya
      * TODO: Current computer player will discard the least useful tile.
      * this method should print what tile is discarded since it should be
@@ -197,7 +199,7 @@ public class OkeyGame {
     }
 
     public void displayDiscardInformation() {
-        if(lastDiscardedTile != null) {
+        if (lastDiscardedTile != null) {
             System.out.println("Last Discarded: " + lastDiscardedTile.toString());
         }
     }
@@ -210,7 +212,7 @@ public class OkeyGame {
         return currentPlayerIndex;
     }
 
-      public String getCurrentPlayerName() {
+    public String getCurrentPlayerName() {
         return players[currentPlayerIndex].getName();
     }
 
@@ -219,7 +221,7 @@ public class OkeyGame {
     }
 
     public void setPlayerName(int index, String name) {
-        if(index >= 0 && index <= 3) {
+        if (index >= 0 && index <= 3) {
             players[index] = new Player(name);
         }
     }
