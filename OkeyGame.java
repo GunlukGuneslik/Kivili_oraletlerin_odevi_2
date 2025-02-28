@@ -138,14 +138,18 @@ public class OkeyGame {
 
         Player player = players[currentPlayerIndex];
         int playerTileCount = findIndexOfArraysLastElement(player.getTiles()) + 1;
-        for (int i = 0; i < playerTileCount; i++) {
-            if (getLastDiscardedTile().canFormChainWith(player.getTiles()[i])) {
-                canChain = true;
-            }
-            if (getLastDiscardedTile().compareTo(player.getTiles()[i]) == 0) {
-                alreadyExists = true;
+
+        if (getLastDiscardedTile() != null) {
+            for (int i = 0; i < playerTileCount; i++) {
+                if (getLastDiscardedTile().canFormChainWith(player.getTiles()[i])) {
+                    canChain = true;
+                }
+                if (getLastDiscardedTile().compareTo(player.getTiles()[i]) == 0) {
+                    alreadyExists = true;
+                }
             }
         }
+
         if (!alreadyExists && canChain) {
             player.addTile(getLastDiscardedTile());
             System.out.println("Player " + player.getName() + " picked the last discarded tile.");
