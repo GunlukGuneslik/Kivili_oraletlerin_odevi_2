@@ -232,4 +232,21 @@ public class OkeyGame {
         }
     }
 
+    public Tile drawAndAddTileToCurrentPlayer() {
+        Tile drawnTile = getTopTile();
+        if (drawnTile != null) {
+            players[currentPlayerIndex].addTile(drawnTile);
+        }
+        return drawnTile;
+    }
+
+    public Tile pickUpDiscardAndAddToCurrentPlayer() {
+        if (lastDiscardedTile != null) {
+            Tile pickedTile = lastDiscardedTile;
+            players[currentPlayerIndex].addTile(pickedTile);
+            lastDiscardedTile = null;
+            return pickedTile;
+        }
+        return null;
+    }
 }
