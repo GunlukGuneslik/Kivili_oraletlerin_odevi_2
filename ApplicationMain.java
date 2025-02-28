@@ -33,8 +33,8 @@ public class ApplicationMain {
             int currentPlayer = game.getCurrentPlayerIndex();
             System.out.println(game.getCurrentPlayerName() + "'s turn.");
 
+            // this is the human player's turn
             if (currentPlayer == 0) {
-                // this is the human player's turn
                 game.displayCurrentPlayersTiles();
                 game.displayDiscardInformation();
 
@@ -56,10 +56,13 @@ public class ApplicationMain {
                 // after the first turn we can pick up
                 if (!firstTurn) {
                     if (playerChoice == 1) {
-                        System.out.println("You picked up: " + game.getTopTile().toString());
+                        Tile topTile = game.drawAndAddTileToCurrentPlayer();
+
+                        System.out.println("You picked up: " + topTile.toString());
                         firstTurn = false;
                     } else if (playerChoice == 2) {
-                        System.out.println("You picked up: " + game.getLastDiscardedTile().toString());
+                        Tile lastDiscardedTile = game.pickUpDiscardAndAddToCurrentPlayer();
+                        System.out.println("You picked up: " + lastDiscardedTile.toString());
                     }
 
                     // display the hand after picking up new tile
@@ -91,8 +94,9 @@ public class ApplicationMain {
                     // if we finish the hand we win
                     System.out.println("Congratulations, you win!");
                 }
-            } else {
-                // this is the computer player's turn
+            }
+            // this is the computer player's turn
+            else {
                 if (devModeOn) {
                     game.displayCurrentPlayersTiles();
                 }
@@ -111,6 +115,7 @@ public class ApplicationMain {
                     System.out.println(game.getCurrentPlayerName() + " wins.");
                 }
             }
+            System.out.println();
         }
     }
 }
