@@ -113,13 +113,15 @@ public class OkeyGame {
         Collections.shuffle(Arrays.asList(tiles));
     }
 
-    /*
+    /**
+     * Game is finished if there is no more tiles left in the board or
+     * a player won the game.
+     * 
      * @author Kerem
-     * TODO: check if game still continues, should return true if current player
-     * finished the game, use isWinningHand() method of Player to decide
+     * @return whether the game is finished
      */
     public boolean didGameFinish() {
-        return players[currentPlayerIndex].isWinningHand();
+        return findIndexOfArraysLastElement(tiles) < 0 || players[currentPlayerIndex].isWinningHand();
     }
 
     /*

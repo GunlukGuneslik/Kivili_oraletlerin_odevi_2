@@ -91,8 +91,11 @@ public class ApplicationMain {
                     game.passTurnToNextPlayer();
 
                 } else {
-                    // if we finish the hand we win
-                    System.out.println("Congratulations, you win!");
+                    boolean didWin = game.players[game.getCurrentPlayerIndex()].isWinningHand();
+                    if (didWin)
+                        System.out.println(game.getCurrentPlayerName() + " wins.");
+                    else
+                        System.out.println("Game has ended. Nobody wins.");
                 }
             }
             // this is the computer player's turn
@@ -112,7 +115,11 @@ public class ApplicationMain {
                     game.passTurnToNextPlayer();
                 } else {
                     // current computer character wins
-                    System.out.println(game.getCurrentPlayerName() + " wins.");
+                    boolean didWin = game.players[game.getCurrentPlayerIndex()].isWinningHand();
+                    if (didWin)
+                        System.out.println(game.getCurrentPlayerName() + " wins.");
+                    else
+                        System.out.println("Game has ended. Nobody wins.");
                 }
             }
             System.out.println();
