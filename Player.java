@@ -20,6 +20,7 @@ public class Player {
             playerTiles[i] = playerTiles[i + 1];
         }
         playerTiles[playerTiles.length - 1] = null;
+        numberOfTiles--;
         return tile;
     }
 
