@@ -58,13 +58,29 @@ public class ApplicationMain {
                     // discard
                     System.out.println("1. Pick From Tiles");
                     System.out.println("2. Pick From Discard");
+
+                    System.out.print("Your choice: ");
+                    playerChoice = sc.nextInt();
+
+                    while (playerChoice < 1 || playerChoice > 2) {
+                        System.out.print("Enter a valid index: ");
+                        playerChoice = sc.nextInt();
+                    }
+
                 } else {
                     // on first turn the starting player does not pick up new tile
                     System.out.println("1. Discard Tile");
+
+                    System.out.print("Your choice: ");
+                    playerChoice = sc.nextInt();
+
+                    while (playerChoice != 1) {
+                        System.out.print("Enter a valid index: ");
+                        playerChoice = sc.nextInt();
+                    }
                 }
 
-                System.out.print("Your choice: ");
-                playerChoice = sc.nextInt();
+                
 
                 // after the first turn we can pick up
                 if (!firstTurn) {
