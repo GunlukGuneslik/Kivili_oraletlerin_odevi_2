@@ -154,7 +154,7 @@ public class OkeyGame {
 
         if (!alreadyExists && canChain) {
             player.addTile(getLastDiscardedTile());
-            System.out.println("Player " + player.getName() + " picked the last discarded tile.");
+            System.out.println("Player " + player.getName() + " picked the last discarded tile. ( " + getLastDiscardedTile() + " )");
         } else {
             player.addTile(getTopTile());
             System.out.println("Player " + player.getName() + " picked a tile from tiles.");
