@@ -18,9 +18,11 @@ public class ApplicationMain {
             willPlay = input.equalsIgnoreCase("Y");
             break;
         }
-
-        System.out.print("Please enter your name: ");
-        String playerName = sc.next();
+        String playerName = "Mahmut";
+        if (willPlay){
+            System.out.print("Please enter your name: ");
+            playerName = sc.next();
+        }
 
         game.setPlayerName(0, playerName);
         game.setPlayerName(1, "John");
