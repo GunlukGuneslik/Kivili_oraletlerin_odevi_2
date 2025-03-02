@@ -162,7 +162,7 @@ public class OkeyGame {
     }
 
     /*
-     * @author: Eftelya
+     * @author: Eftelya, Çağla Güneş
      * TODO: Current computer player will discard the least useful tile.
      * this method should print what tile is discarded since it should be
      * known by other players. You may first discard duplicates and then
@@ -172,31 +172,61 @@ public class OkeyGame {
         Player curPlayer = players[currentPlayerIndex];
         int playerTileCount = findIndexOfArraysLastElement(curPlayer.getTiles()) + 1;
 
+        int indexOfDiscardTile = -1;
+
         // Check for duplicates
         for (int i = 1; i < playerTileCount; i++) {
             if (curPlayer.getTiles()[i].compareTo(curPlayer.getTiles()[i - 1]) == 0) {
-                lastDiscardedTile = curPlayer.getAndRemoveTile(i - 1);
-                displayDiscardInformation();
-                return;
+                indexOfDiscardTile = i - 1;
+                
             }
         }
         // Check for matching tiles
-        for (int i = 0; i < playerTileCount; i++) {
-            boolean matching = false;
-            if (i > 0) {
-                matching = matching || curPlayer.getTiles()[i].getValue() == curPlayer.getTiles()[i - 1].getValue();
-            }
-            if (i < curPlayer.getTiles().length - 1) {
-                matching = matching || curPlayer.getTiles()[i].getValue() == curPlayer.getTiles()[i + 1].getValue();
-            }
-
-            if (!matching) {
-                lastDiscardedTile = curPlayer.getAndRemoveTile(i);
-                displayDiscardInformation();
-                return;
-            }
+        if (indexOfDiscardTile < 0) {
+            indexOfDiscardTile = findIndexOfArraysLastElement(curPlayer.getTiles());
         }
 
+        lastDiscardedTile = curPlayer.getAndRemoveTile(i - 1);
+        displayDiscardInformation();
+    }
+
+    /**
+    * @author Çağla Güneş
+    * finds the index of the smallest cahin's last element
+    * if there is a tile cannot chain with any other tiles, obviously method returns the index ot this sole tile.
+    * remark that this method always returns a value!
+    */
+    private int findTheShortestChain (Tile[] arr) {
+        int leastRepetation = arr.length - 1;
+        int result = 0;
+
+        Tile last = arr[0];
+        int counter = 1;
+        for (int i = 1; i < arr.length - 1; i++) {
+            Tile current = arr[i];
+            if (current.getValue == last.getValue) {
+                counter++;
+            } else {
+                if (counter < leastRepetation) {
+                    leastRepetation = counter;
+                    result = i - 1;
+                }
+                counter = 1;
+            }
+            last = current;
+        }
+
+        // for the last tile
+        if (arr[arr.length - 1].getValue == arr[arr.length - 2].getValue) {
+            if (counter < leastRepetation) {
+                    leastRepetation = counter;
+                    result = arr.length - 1;
+                }
+        } else {
+            result = arr.length - 1;
+        }
+
+        return result;
     }
 
     /*

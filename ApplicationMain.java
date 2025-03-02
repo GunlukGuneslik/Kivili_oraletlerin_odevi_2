@@ -8,7 +8,7 @@ public class ApplicationMain {
 
         boolean willPlay;
         while (true) {
-            System.out.println("Will there be a human Player? (Y/N):");
+            System.out.print("Will there be a human Player? (Y/N):");
             String input = sc.next();
             input = input.toUpperCase();
             if (!"YN".contains(input)) {
@@ -34,7 +34,7 @@ public class ApplicationMain {
         // developer mode is used for seeing the computer players hands, to be used for
         // debugging
         System.out.print("Play in developer's mode with other player's tiles visible? (Y/N): ");
-        char devMode = Character.toUpperCase(sc.next().charAt(0));
+        char devMode = sc.next().charAt(0);
         boolean devModeOn = devMode == 'Y';
 
         boolean firstTurn = true;
@@ -51,7 +51,7 @@ public class ApplicationMain {
                 game.displayCurrentPlayersTiles();
                 game.displayDiscardInformation();
 
-                System.out.println("do?");
+                System.out.println("What will you do?");
 
                 if (!firstTurn) {
                     // after the first turn, player may pick from tile stack or last player's
