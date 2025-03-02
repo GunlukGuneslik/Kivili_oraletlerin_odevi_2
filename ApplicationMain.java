@@ -153,5 +153,6 @@ public class ApplicationMain {
             }
             System.out.println();
         }
+        sc.close();
     }
 }
