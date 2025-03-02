@@ -156,8 +156,9 @@ public class OkeyGame {
             player.addTile(getLastDiscardedTile());
             System.out.println("Player " + player.getName() + " picked the last discarded tile. ( " + getLastDiscardedTile() + " )");
         } else {
-            player.addTile(getTopTile());
-            System.out.println("Player " + player.getName() + " picked a tile from tiles.");
+            Tile tile = getTopTile();
+            player.addTile(tile);
+            System.out.println("Player " + player.getName() + " picked a tile from tiles. (" + tile + ")");
         }
     }
 
@@ -182,7 +183,7 @@ public class OkeyGame {
         }
         // Check for matching tiles
         if (indexOfDiscardTile < 0) {
-            indexOfDiscardTile = findIndexOfArraysLastElement(curPlayer.getTiles());
+            indexOfDiscardTile = findTheindexOfElemenFromShortestChain(curPlayer.getTiles());
         }
 
         lastDiscardedTile = curPlayer.getAndRemoveTile(indexOfDiscardTile);
@@ -195,7 +196,7 @@ public class OkeyGame {
     * if there is a tile cannot chain with any other tiles, obviously method returns the index ot this sole tile.
     * remark that this method always returns a value!
     */
-    private int findTheShortestChain (Tile[] arr) {
+    private int findTheindexOfElemenFromShortestChain (Tile[] arr) {
         int leastRepetation = arr.length - 1;
         int result = 0;
 
@@ -203,7 +204,7 @@ public class OkeyGame {
         int counter = 1;
         for (int i = 1; i < arr.length - 1; i++) {
             Tile current = arr[i];
-            if (current.getValue == last.getValue) {
+            if (current.getValue() == last.getValue()) {
                 counter++;
             } else {
                 if (counter < leastRepetation) {
@@ -216,7 +217,7 @@ public class OkeyGame {
         }
 
         // for the last tile
-        if (arr[arr.length - 1].getValue == arr[arr.length - 2].getValue) {
+        if (arr[arr.length - 1].getValue() == arr[arr.length - 2].getValue()) {
             if (counter < leastRepetation) {
                     leastRepetation = counter;
                     result = arr.length - 1;
