@@ -162,7 +162,7 @@ public class OkeyGame {
     }
 
     /*
-     * @author: Eftelya, Çağla Güneş
+     * @author: Eftelya, Cagla Gunes
      * TODO: Current computer player will discard the least useful tile.
      * this method should print what tile is discarded since it should be
      * known by other players. You may first discard duplicates and then
@@ -177,8 +177,7 @@ public class OkeyGame {
         // Check for duplicates
         for (int i = 1; i < playerTileCount; i++) {
             if (curPlayer.getTiles()[i].compareTo(curPlayer.getTiles()[i - 1]) == 0) {
-                indexOfDiscardTile = i - 1;
-                
+                indexOfDiscardTile = i - 1;   
             }
         }
         // Check for matching tiles
@@ -186,7 +185,7 @@ public class OkeyGame {
             indexOfDiscardTile = findIndexOfArraysLastElement(curPlayer.getTiles());
         }
 
-        lastDiscardedTile = curPlayer.getAndRemoveTile(i - 1);
+        lastDiscardedTile = curPlayer.getAndRemoveTile(indexOfDiscardTile);
         displayDiscardInformation();
     }
 
